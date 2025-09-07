@@ -2,14 +2,12 @@ variable "admin_username" {
   description = "Username for Linux VM"
   type        = string
   sensitive   = true
-  default = "adminkijaiho"
 }
 
 variable "admin_password" {
   description = "Password for Linux VM"
   type        = string
   sensitive   = true
-  default = "hell@Ju2"
 }
 
 variable "vm_name" {
