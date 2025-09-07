@@ -2,10 +2,6 @@ name: Deploy Infra on Azure
 
 on:
     workflow_dispatch:
-    push:
-        branches:
-            - main
-            - feature/infra
 
 
 jobs:
