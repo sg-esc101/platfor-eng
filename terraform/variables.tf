@@ -13,13 +13,13 @@ variable "admin_password" {
 variable "vm_name" {
   description = "Linux VM name"
   type        = string
-  default = "linux-vm"
+  default     = "linux-vm"
 }
 
 variable "resource_group_name" {
   description = "Azure Resource Group name"
   type        = string
-  default = "rg"
+  default     = "rg"
 }
 
 variable "location" {
@@ -30,12 +30,12 @@ variable "location" {
 
 variable "vnet_name" {
   description = "Virtual Network Name"
-  type = string
-  default = "vnet"
+  type        = string
+  default     = "vnet"
 }
 
 variable "subnet_name" {
   description = "Subnet name"
-  type = string
-  default = "public_subnet"
+  type        = string
+  default     = "public_subnet"
 }
