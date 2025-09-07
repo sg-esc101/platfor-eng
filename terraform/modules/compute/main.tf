@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                            = var.vm_name
   resource_group_name             = var.resource_group_name
   location                        = var.location
-  size                            = "Standard_B1s"
+  size                            = "Standard_B2s"
   admin_username                  = var.admin_username
   disable_password_authentication = false
   admin_password                  = var.admin_password
