@@ -1,17 +1,22 @@
-# import sys
-# import os
+import sys
+import os
 
 # # Add the parent directory of 'fastapi_app' to sys.path
 # # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# sys.path.append("/home/hacker/platfor-eng/platfor-eng")
+sys.path.append("/home/hacker/platfor-eng/fastapi_app/main.py")
 # import fastapi_app
-from main import app
+# from main import app
+from fastapi_app.main import test, app
 from fastapi.testclient import TestClient
 
 
 client = TestClient(app)
 
+def test_test():
+    response = test()
+    assert response == "OK"
 
+    
 def test_status():
     response = client.get("/status")
     assert response.status_code == 200
