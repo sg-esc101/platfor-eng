@@ -93,6 +93,7 @@ resource "null_resource" "install_dependencies" {
     inline = [
       "chmod +x /tmp/setup_vm_dependencies.sh",
       "sudo /tmp/setup_vm_dependencies.sh"
+      "sudo usermod -aG docker ${var.admin_username}"
     ]
   }
 }

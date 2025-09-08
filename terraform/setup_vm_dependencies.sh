@@ -51,7 +51,6 @@ echo "=== Installing Helm ==="
 curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -s -- --version v3.15.4
 
 echo "=== Tool installation complete ==="
-sudo usermod -aG docker "$USER"
 
 
 
