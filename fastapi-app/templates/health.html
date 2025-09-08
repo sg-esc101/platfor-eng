@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Health Check</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Application Health Metrics</h1>
+    <ul>
+        <li><strong>CPU Usage:</strong> {{ health_data.cpu_percent }}%</li>
+        <li><strong>Memory Total:</strong> {{ health_data.memory_total }} GB</li>
+        <li><strong>Memory Available:</strong> {{ health_data.memory_available }} GB</li>
+        <li><strong>Memory Used:</strong> {{ health_data.memory_used }} GB</li>
+        <li><strong>Memory Free:</strong> {{ health_data.memory_free }} GB</li>
+        <li><strong>Disk Total:</strong> {{ health_data.disk_total }} GB</li>
+        <li><strong>Disk Used:</strong> {{ health_data.disk_used }} GB</li>
+        <li><strong>Disk Free:</strong> {{ health_data.disk_free }} GB</li>
+        <li><strong>Disk Usage:</strong> {{ health_data.disk_percent }}%</li>
+    </ul>
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>
