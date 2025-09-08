@@ -59,9 +59,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Copy repository to VM
+      - name: Copy repository to VM using rsync
         run: |
-          sshpass -p "$ADMIN_PASS" scp -o StrictHostKeyChecking=no -r . $ADMIN_USER@$VM_IP:~/platfor-eng
+          sshpass -p "$ADMIN_PASS" rsync -av --delete -e "ssh -o StrictHostKeyChecking=no" ./ $ADMIN_USER@$VM_IP:~/platfor-eng/
 
       - name: Deploy manifests on VM
         run: |
