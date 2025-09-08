@@ -2,7 +2,6 @@ name: Infra And CD
 
 on:
   workflow_dispatch:
-  push:
 jobs:
   # Job 1: Provision Azure VM
   provision:
