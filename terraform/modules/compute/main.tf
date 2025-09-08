@@ -70,6 +70,53 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+resource "null_resource" "install_dependencies" {
+  depends_on = [azurerm_linux_virtual_machine.vm]
+  connection {
+    type     = "ssh"
+    host     = azurerm_public_ip.vm_public_ip.ip_address
+    user     = var.admin_username
+    password = var.admin_password
+    timeout  = "5m"
+  }
+
+  provisioner "file" {
+    source      = "setup_vm_dependencies.sh"
+    destination = "/tmp/setup_vm_dependencies.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/setup_vm_dependencies.sh",
+      "sudo /tmp/setup_vm_dependencies.sh"
+    ]
+  }
+}
+
+resource "null_resource" "setup_cluster" {
+  depends_on = [null_resource.install_dependencies]
+
+  connection {
+    type     = "ssh"
+    host     = azurerm_public_ip.vm_public_ip.ip_address
+    user     = var.admin_username
+    password = var.admin_password
+    timeout  = "5m"
+  }
+
+  provisioner "file" {
+    source      = "preparing_as_k8s_cluster.sh"
+    destination = "/tmp/preparing_as_k8s_cluster.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/preparing_as_k8s_cluster.sh",
+      "sudo /tmp/preparing_as_k8s_cluster.sh"
+    ]
+  }
+}
+
 # Vm- public IP address
 output "vm_public_ip" {
   description = "Public IP of the VM for SSH access"
