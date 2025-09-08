@@ -72,6 +72,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
 }
 resource "null_resource" "install_dependencies" {
   depends_on = [azurerm_linux_virtual_machine.vm]
+  triggers = {
+    vm_id = azurerm_linux_virtual_machine.vm.id
+  }
+
   connection {
     type     = "ssh"
     host     = azurerm_public_ip.vm_public_ip.ip_address
@@ -95,6 +99,9 @@ resource "null_resource" "install_dependencies" {
 
 resource "null_resource" "setup_cluster" {
   depends_on = [null_resource.install_dependencies]
+  triggers = {
+    vm_id = azurerm_linux_virtual_machine.vm.id
+  }
 
   connection {
     type     = "ssh"

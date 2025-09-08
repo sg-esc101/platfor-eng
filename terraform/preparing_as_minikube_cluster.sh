@@ -2,10 +2,10 @@
 set -e
 
 echo "=== Starting Minikube ==="
-sudo minikube start --driver=docker --cpus=2 --memory=4096
+minikube start --driver=docker --cpus=2 --memory=4096
 
 echo "=== Enabling NGINX ingress addon ==="
-sudo minikube addons enable ingress
+minikube addons enable ingress
 
 echo "=== Installing Prometheus & Grafana via Helm ==="
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
