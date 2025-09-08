@@ -59,6 +59,14 @@ After deployment, the VM's public IP will be available in the workflow output as
 * **FastAPI**: `http://<vm_ip>/`
 * **Grafana**: `http://<vm_ip>/grafana`
 * **Prometheus**: `http://<vm_ip>/prometheus`
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/f2265dd6-1b9c-467f-bb8c-a54684628550" />
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/2d1907f5-170e-4dca-bdff-99dd3ffa1154" />
+
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/f209383e-7a98-4ffe-a4a0-c7fa9c339610" />
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/a9610c09-d901-46a6-843c-60b06e481089" />
 
 ---
 
@@ -68,4 +76,5 @@ After deployment, the VM's public IP will be available in the workflow output as
 * If you have trouble accessing services, you can check the Kubernetes services and ingress setup on the VM using the following commands:
     * `kubectl get svc -A`
     * `kubectl get ingress -A`
+
 
