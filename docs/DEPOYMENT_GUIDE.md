@@ -20,8 +20,11 @@ This guide explains how to deploy the project using the provided GitHub Actions 
 1. Navigate to your repository's **Actions** tab.
 2. Select the **CI** workflow.
 3. Trigger it manually, if needed, using **Run workflow**.
-   <img width="1898" height="444" alt="image" src="https://github.com/user-attachments/assets/c9c287ec-819f-419f-9f4a-b1b5b1b3a429" />
 
+
+<img width="1920" height="633" alt="image" src="https://github.com/user-attachments/assets/19aaee45-10fd-432f-8e30-e01f8def7801" />
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/6e01690e-667e-456a-8f2a-fe7f354142b6" />
 
 ---
 
@@ -41,6 +44,12 @@ This guide explains how to deploy the project using the provided GitHub Actions 
 3. Trigger it manually using **Run workflow**.
 4. Monitor the logs to see the VM provisioning and deployment progress.
 
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/b9798210-be51-4713-915d-5c32b8555e50" />
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/1125f3f9-4766-43d2-8051-ff95f80f22c0" />
+
+<img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/124bb095-94c9-4673-8fa5-cb06fc786e08" />
+
 ---
 
 ## 3. Accessing the Application
@@ -59,3 +68,4 @@ After deployment, the VM's public IP will be available in the workflow output as
 * If you have trouble accessing services, you can check the Kubernetes services and ingress setup on the VM using the following commands:
     * `kubectl get svc -A`
     * `kubectl get ingress -A`
+
