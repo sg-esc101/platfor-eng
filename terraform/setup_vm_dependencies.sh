@@ -4,13 +4,18 @@ set -e  # Exit on any error
 # --- Prevent interactive prompts during apt installs/upgrades ---
 export DEBIAN_FRONTEND=noninteractive
 export NEEDRESTART_MODE=a
+sudo sh -c 'echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections'
+sudo sh -c 'echo "needrestart needrestart/restart select a" | debconf-set-selections'
 
 echo "=== Updating system packages ==="
 sudo apt-get update -y
-sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+sudo apt-get -o Dpkg::Options::="--force-confdef" \
+             -o Dpkg::Options::="--force-confold" \
+             -y upgrade
 
 echo "=== Installing prerequisites ==="
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release git software-properties-common
+
 
 # --- Docker ---
 echo "=== Installing Docker ==="
