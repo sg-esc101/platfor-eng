@@ -1,11 +1,11 @@
-import sys
-import os
+# import sys
+# import os
 
-# Add the parent directory of 'fastapi_app' to sys.path
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-sys.path.append("/home/hacker/platfor-eng/platfor-eng")
+# # Add the parent directory of 'fastapi_app' to sys.path
+# # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# sys.path.append("/home/hacker/platfor-eng/platfor-eng")
 # import fastapi_app
-from fastapi_app.main import app
+from main import app
 from fastapi.testclient import TestClient
 
 
