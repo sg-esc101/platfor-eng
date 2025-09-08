@@ -105,14 +105,14 @@ resource "null_resource" "setup_cluster" {
   }
 
   provisioner "file" {
-    source      = "preparing_as_k8s_cluster.sh"
-    destination = "/tmp/preparing_as_k8s_cluster.sh"
+    source      = "preparing_as_minikube_cluster.sh"
+    destination = "/tmp/preparing_as_minikube_cluster.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/preparing_as_k8s_cluster.sh",
-      "sudo /tmp/preparing_as_k8s_cluster.sh"
+      "chmod +x /tmp/preparing_as_minikube_cluster.sh",
+      "sudo /tmp/preparing_as_minikube_cluster.sh"
     ]
   }
 }
