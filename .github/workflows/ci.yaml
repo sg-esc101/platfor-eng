@@ -27,7 +27,9 @@ jobs:
         run: flake8 fastapi-app
 
       - name: Test
-        run: pytest fastapi-app/tests
+        run: |
+            cd fastapi-app
+            pytest tests
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
