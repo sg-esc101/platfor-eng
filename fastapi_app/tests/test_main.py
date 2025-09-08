@@ -14,3 +14,4 @@ def test_status():
 def test_root():
     response = client.get("/")
     assert response.status_code == 200
+
