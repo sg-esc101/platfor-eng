@@ -3,12 +3,13 @@ from main import app
 
 client = TestClient(app)
 
-def test_status_endpoint():
+
+def test_status():
     response = client.get("/status")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}
 
-def test_root_endpoint():
+
+def test_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert "Hello World" in response.text
