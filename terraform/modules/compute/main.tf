@@ -92,7 +92,29 @@ resource "null_resource" "install_dependencies" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/setup_vm_dependencies.sh",
-      "sudo /tmp/setup_vm_dependencies.sh",
+      "sudo /tmp/setup_vm_dependencies.sh"
+      
+    ]
+  }
+}
+
+# New resource to add the user to the docker group
+resource "null_resource" "add_user_to_docker_group" {
+  depends_on = [null_resource.install_dependencies]
+  triggers = {
+    vm_id = azurerm_linux_virtual_machine.vm.id
+  }
+
+  connection {
+    type     = "ssh"
+    host     = azurerm_public_ip.vm_public_ip.ip_address
+    user     = var.admin_username
+    password = var.admin_password
+    timeout  = "5m"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
       "sudo usermod -aG docker ${var.admin_username}"
     ]
   }
