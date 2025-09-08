@@ -42,8 +42,9 @@ jobs:
         id: get_ip
         working-directory: terraform
         run: |
-          VM_IP=$(terraform output -raw vm_public_ip)
+          VM_IP=$(terraform output -raw compute.vm_public_ip)
           echo "vm_ip=$VM_IP" >> $GITHUB_OUTPUT
+
 
   # Job 2: Deploy FastAPI on Minikube
   deploy:
