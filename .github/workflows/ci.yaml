@@ -20,15 +20,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r fastapi-app/requirements.txt
+          pip install -r fastapi_app/requirements.txt
           pip install pytest flake8
 
       - name: Lint
-        run: flake8 fastapi-app
+        run: flake8 fastapi_app
 
       - name: Test
         run: |
-            cd fastapi-app
+            cd fastapi_app
             pytest tests
 
       - name: Log in to DockerHub
@@ -40,6 +40,6 @@ jobs:
       - name: Build & Push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./fastapi-app
+          context: ./fastapi_app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-app:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fastapi_app:latest
