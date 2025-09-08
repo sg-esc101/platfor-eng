@@ -64,7 +64,6 @@ jobs:
 
       - name: Deploy manifests on VM
         run: |
-          sshpass -p "$ADMIN_PASS" ssh -o StrictHostKeyChecking=no $ADMIN_USER@$VM_IP << 'EOF'
-            echo "Deploying FastAPI app on Minikube..."
-            kubectl apply -f ~/platfor-eng/manifests/
-EOF
+          sshpass -p "$ADMIN_PASS" ssh -o StrictHostKeyChecking=no $ADMIN_USER@$VM_IP \
+          "echo 'Deploying FastAPI app on Minikube...'; kubectl apply -f ~/platfor-eng/manifests/"
+
