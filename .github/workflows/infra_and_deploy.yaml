@@ -1,0 +1,70 @@
+name: Infra + CD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Job 1: Provision Azure VM
+  provision:
+    runs-on: ubuntu-latest
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_VAR_admin_username: ${{ secrets.VM_ADMIN_USERNAME }}
+      TF_VAR_admin_password: ${{ secrets.VM_ADMIN_PASSWORD }}
+    outputs:
+      vm_ip: ${{ steps.get_ip.outputs.vm_ip }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: terraform
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: terraform
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: terraform
+        run: terraform plan -var-file="input.tfvars" -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: terraform
+        run: terraform apply -auto-approve tfplan
+
+      - name: Get VM Public IP
+        id: get_ip
+        working-directory: terraform
+        run: |
+          VM_IP=$(terraform output -raw vm_public_ip)
+          echo "vm_ip=$VM_IP" >> $GITHUB_OUTPUT
+
+  # Job 2: Deploy FastAPI on Minikube
+  deploy:
+    needs: provision
+    runs-on: ubuntu-latest
+    env:
+      ADMIN_USER: ${{ secrets.VM_ADMIN_USERNAME }}
+      ADMIN_PASS: ${{ secrets.VM_ADMIN_PASSWORD }}
+      VM_IP: ${{ needs.provision.outputs.vm_ip }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy repository to VM
+        run: |
+          sshpass -p "$ADMIN_PASS" scp -o StrictHostKeyChecking=no -r . $ADMIN_USER@$VM_IP:~/platfor-eng
+
+      - name: Deploy manifests on VM
+        run: |
+          sshpass -p "$ADMIN_PASS" ssh -o StrictHostKeyChecking=no $ADMIN_USER@$VM_IP << 'EOF'
+            echo "Deploying FastAPI app on Minikube..."
+            kubectl apply -f ~/platfor-eng/manifests/
+EOF
