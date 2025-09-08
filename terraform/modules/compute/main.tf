@@ -119,7 +119,7 @@ resource "null_resource" "setup_cluster" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/preparing_as_minikube_cluster.sh",
-      "sudo /tmp/preparing_as_minikube_cluster.sh"
+      "/tmp/preparing_as_minikube_cluster.sh"
     ]
   }
 }
