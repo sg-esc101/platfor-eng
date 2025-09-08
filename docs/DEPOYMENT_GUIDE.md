@@ -56,7 +56,7 @@ This guide explains how to deploy the project using the provided GitHub Actions 
 
 After deployment, the VM's public IP will be available in the workflow output as `vm_ip`. Use this IP to access the following services:
 
-* **FastAPI**: `http://<vm_ip>/`
+* **FastAPI**: `http://<vm_ip>/fastapi`
 * **Grafana**: `http://<vm_ip>/grafana`
 * **Prometheus**: `http://<vm_ip>/prometheus`
 <img width="1920" height="780" alt="image" src="https://github.com/user-attachments/assets/f2265dd6-1b9c-467f-bb8c-a54684628550" />
@@ -76,5 +76,6 @@ After deployment, the VM's public IP will be available in the workflow output as
 * If you have trouble accessing services, you can check the Kubernetes services and ingress setup on the VM using the following commands:
     * `kubectl get svc -A`
     * `kubectl get ingress -A`
+
 
 
